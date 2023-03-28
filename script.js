@@ -1,18 +1,18 @@
-var tab_ball_g = [];
-var tab_anime_g = [];
-
-var ballCount = 50; // a counter for the number of balls that have been added
+var tab_ball_g = []; // tableau qui crer les balles dégradés + position
+var tab_anime_g = []; // tableau qui va contenir les ball a animer
+var ballCount = 50; // nombre de balles
+const width_ball = 80; // largeur de la balle
 var delay = 1; // the number of frames to wait before adding a new ball (60 frames = 1 second)
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(100);
   for (let i = 0; i <= ballCount; i++) {
     tab_ball_g[i] = new Ball(
-      windowWidth / 2,
+      windowWidth / 2 + width_ball / 2,
       windowHeight / 2 - i * 6.473,
-      80,
+      width_ball,
       0,
-      255 - i * 5.1,
+      255 - i * (255 / ballCount),
       0,
       1
     );
@@ -29,7 +29,7 @@ function draw() {
     ballCount--;
   }
   if (ballCount == 0) {
-    noLoop();
+    noLoop(); // stop the animation
   }
 }
 class Ball {
