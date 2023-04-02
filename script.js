@@ -10,7 +10,7 @@ if (window.DeviceMotionEvent) {
 // Fonction pour gérer les événements de mouvement de l'appareil
 function deviceMotionHandler(eventData) {
   var acceleration = eventData.accelerationIncludingGravity;
-  var threshold = 15;
+  var threshold = 2;
 
   // Calculer la force de la secousse
   var shakeX = Math.abs(acceleration.x - gravity.x);
