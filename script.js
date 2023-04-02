@@ -18,7 +18,7 @@ window.addEventListener("devicemotion", function (e) {
     Math.abs(accelerationZ - lastZ) > seuilSecousse
   ) {
     // Une secousse a été détectée
-    console.log("Secousse détectée!");
+    alert("Secousse détectée!");
   }
 
   // Mettre à jour les dernières valeurs
