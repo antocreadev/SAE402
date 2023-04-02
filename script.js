@@ -4,17 +4,21 @@
 Ce code utilise window.DeviceMotionEvent pour détecter les appareils Android et window.DeviceOrientationEvent pour détecter les appareils iOS. La fonction deviceMotionHandler est utilisée pour détecter une secousse sur les appareils Android, tandis que la fonction deviceOrientationHandler est utilisée pour détecter une secousse sur les appareils iOS.
 
 
-*/
-// Détecter une secousse ou un mouvement de secousse
+*/ // Détecter une secousse ou un mouvement de secousse
 if (window.DeviceMotionEvent) {
   window.addEventListener("devicemotion", deviceMotionHandler, false);
   document.body.style.backgroundColor = "green";
 } else if (window.DeviceOrientationEvent) {
   window.addEventListener("deviceorientation", deviceOrientationHandler, false);
   document.body.style.backgroundColor = "white";
+} else if (window.DeviceMotionEvent && window.DeviceOrientationEvent) {
+  // iOS gyroscope detection
+  window.addEventListener("deviceorientation", deviceOrientationHandler, false);
+  window.addEventListener("devicemotion", deviceMotionHandler, false);
+  document.body.style.backgroundColor = "purple";
 } else {
   console.log(
-    "L'accéléromètre et la boussole ne sont pas disponibles sur cet appareil."
+    "L'accéléromètre, la boussole et le gyroscope ne sont pas disponibles sur cet appareil."
   );
   document.body.style.backgroundColor = "red";
 }
@@ -37,14 +41,20 @@ function deviceMotionHandler(eventData) {
 
 // Fonction pour gérer les événements d'orientation de l'appareil
 function deviceOrientationHandler(eventData) {
-  var threshold = 5;
+  var threshold = 90;
 
-  // Calculer l'angle de rotation autour de l'axe Z (vertical)
-  var rotation = eventData.alpha;
+  if (
+    eventData.alpha != null &&
+    eventData.beta != null &&
+    eventData.gamma != null
+  ) {
+    // Calculer l'angle de rotation autour de l'axe Z (vertical)
+    var rotation = Math.abs(eventData.gamma);
 
-  // Si l'angle de rotation est suffisamment grand, afficher une alerte
-  if (rotation > threshold) {
-    document.body.style.backgroundColor = "blue";
+    // Si l'angle de rotation est suffisamment grand, afficher une alerte
+    if (rotation > threshold) {
+      document.body.style.backgroundColor = "blue";
+    }
   }
 }
 
