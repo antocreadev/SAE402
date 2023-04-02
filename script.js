@@ -1,8 +1,10 @@
 // Détecter une secousse ou un mouvement de secousse
 if (window.DeviceMotionEvent) {
   window.addEventListener("devicemotion", deviceMotionHandler, false);
+  document.body.style.backgroundColor = "yellow";
 } else {
   console.log("L'accéléromètre n'est pas disponible sur cet appareil.");
+  document.body.style.backgroundColor = "red";
 }
 
 // Fonction pour gérer les événements de mouvement de l'appareil
@@ -18,7 +20,6 @@ function deviceMotionHandler(eventData) {
   // Si la secousse est suffisamment forte, afficher une alerte
   if (shakeX > threshold || shakeY > threshold || shakeZ > threshold) {
     document.body.style.backgroundColor = "blue";
-    alert("Secousse détectée!");
   }
 }
 
