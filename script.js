@@ -1,28 +1,44 @@
-// Définir un seuil de secousse
-var seuilSecousse = 20;
+// Détecter une secousse ou un mouvement de secousse
+if (window.DeviceMotionEvent) {
+  window.addEventListener("devicemotion", deviceMotionHandler, false);
+} else {
+  document.body.style.backgroundColor = "red";
+}
 
-// Variables pour stocker la dernière position
-var lastX, lastY, lastZ;
+// Fonction pour gérer les événements de mouvement de l'appareil
+function deviceMotionHandler(eventData) {
+  var acceleration = eventData.accelerationIncludingGravity;
+  var threshold = 15;
 
-// Ajouter un écouteur d'événements pour l'événement 'devicemotion'
-window.addEventListener("devicemotion", function (e) {
-  // Obtenir l'accélération sur l'axe X, Y et Z
-  var accelerationX = e.accelerationIncludingGravity.x;
-  var accelerationY = e.accelerationIncludingGravity.y;
-  var accelerationZ = e.accelerationIncludingGravity.z;
+  // Calculer la force de la secousse
+  var shakeX = Math.abs(acceleration.x - gravity.x);
+  var shakeY = Math.abs(acceleration.y - gravity.y);
+  var shakeZ = Math.abs(acceleration.z - gravity.z);
 
-  // Vérifier si les valeurs de l'accélération ont changé de manière significative par rapport aux dernières valeurs
-  if (
-    Math.abs(accelerationX - lastX) > seuilSecousse ||
-    Math.abs(accelerationY - lastY) > seuilSecousse ||
-    Math.abs(accelerationZ - lastZ) > seuilSecousse
-  ) {
-    // Une secousse a été détectée
+  // Si la secousse est suffisamment forte, afficher une alerte
+  if (shakeX > threshold || shakeY > threshold || shakeZ > threshold) {
+    document.body.style.backgroundColor = "blue";
     alert("Secousse détectée!");
   }
+}
 
-  // Mettre à jour les dernières valeurs
-  lastX = accelerationX;
-  lastY = accelerationY;
-  lastZ = accelerationZ;
-});
+// Obtenir les valeurs de gravité
+var gravity = {
+  x: 0,
+  y: 0,
+  z: 0,
+};
+
+window.addEventListener(
+  "devicemotion",
+  function (event) {
+    // Récupérer les données de l'accéléromètre
+    var acceleration = event.accelerationIncludingGravity;
+
+    // Calculer la moyenne pondérée pour la gravité
+    gravity.x = gravity.x * 0.9 + acceleration.x * 0.1;
+    gravity.y = gravity.y * 0.9 + acceleration.y * 0.1;
+    gravity.z = gravity.z * 0.9 + acceleration.z * 0.1;
+  },
+  true
+);
