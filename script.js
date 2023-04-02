@@ -1,3 +1,11 @@
+/*
+
+
+Ce code utilise window.DeviceMotionEvent pour détecter les appareils Android et window.DeviceOrientationEvent pour détecter les appareils iOS. La fonction deviceMotionHandler est utilisée pour détecter une secousse sur les appareils Android, tandis que la fonction deviceOrientationHandler est utilisée pour détecter une secousse sur les appareils iOS.
+
+
+*/
+
 // Détecter une secousse ou un mouvement de secousse
 if (window.DeviceMotionEvent) {
   window.addEventListener("devicemotion", deviceMotionHandler, false);
