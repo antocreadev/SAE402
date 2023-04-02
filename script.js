@@ -2,7 +2,7 @@
 if (window.DeviceMotionEvent) {
   window.addEventListener("devicemotion", deviceMotionHandler, false);
 } else {
-  document.body.style.backgroundColor = "red";
+  console.log("L'accéléromètre n'est pas disponible sur cet appareil.");
 }
 
 // Fonction pour gérer les événements de mouvement de l'appareil
