@@ -21,7 +21,7 @@ if (window.DeviceOrientationEvent && "ontouchstart" in window) {
       Math.abs(rotation.gamma);
 
     // Calculer la force de la secousse
-    var shakeThreshold = 30;
+    var shakeThreshold = 100;
     var shakeX = Math.abs(acceleration.x) > shakeThreshold ? 1 : 0;
     var shakeY = Math.abs(acceleration.y) > shakeThreshold ? 1 : 0;
     var shakeZ = Math.abs(acceleration.z) > shakeThreshold ? 1 : 0;
