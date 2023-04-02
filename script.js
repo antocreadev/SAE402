@@ -4,21 +4,53 @@
 Ce code utilise window.DeviceMotionEvent pour détecter les appareils Android et window.DeviceOrientationEvent pour détecter les appareils iOS. La fonction deviceMotionHandler est utilisée pour détecter une secousse sur les appareils Android, tandis que la fonction deviceOrientationHandler est utilisée pour détecter une secousse sur les appareils iOS.
 
 
-*/ // Détecter une secousse ou un mouvement de secousse
+*/
+
+// Vérifier si l'appareil prend en charge le gyroscope
+if (window.DeviceOrientationEvent && "ontouchstart" in window) {
+  // Ajouter un écouteur d'événement pour le gyroscope
+  window.addEventListener("devicemotion", function (event) {
+    // Récupérer les données du gyroscope
+    var acceleration = event.accelerationIncludingGravity;
+    var rotation = event.rotationRate;
+
+    // Calculer la vitesse angulaire totale de l'appareil
+    var totalRotation =
+      Math.abs(rotation.alpha) +
+      Math.abs(rotation.beta) +
+      Math.abs(rotation.gamma);
+
+    // Calculer la force de la secousse
+    var shakeThreshold = 30;
+    var shakeX = Math.abs(acceleration.x) > shakeThreshold ? 1 : 0;
+    var shakeY = Math.abs(acceleration.y) > shakeThreshold ? 1 : 0;
+    var shakeZ = Math.abs(acceleration.z) > shakeThreshold ? 1 : 0;
+
+    // Si la vitesse angulaire totale ou la force de la secousse est suffisamment grande, afficher une alerte
+    if (totalRotation > shakeThreshold || shakeX + shakeY + shakeZ > 1) {
+      document.body.style.backgroundColor = "white";
+    }
+  });
+} else {
+  console.log("Le gyroscope n'est pas disponible sur cet appareil.");
+}
+
+// Détecter une secousse ou un mouvement de secousse
 if (window.DeviceMotionEvent) {
   window.addEventListener("devicemotion", deviceMotionHandler, false);
   document.body.style.backgroundColor = "green";
-} else if (window.DeviceOrientationEvent) {
-  window.addEventListener("deviceorientation", deviceOrientationHandler, false);
-  document.body.style.backgroundColor = "white";
-} else if (window.DeviceMotionEvent && window.DeviceOrientationEvent) {
-  // iOS gyroscope detection
-  window.addEventListener("deviceorientation", deviceOrientationHandler, false);
-  window.addEventListener("devicemotion", deviceMotionHandler, false);
-  document.body.style.backgroundColor = "purple";
 } else {
   console.log(
-    "L'accéléromètre, la boussole et le gyroscope ne sont pas disponibles sur cet appareil."
+    "L'accéléromètre et la boussole ne sont pas disponibles sur cet appareil."
+  );
+  document.body.style.backgroundColor = "red";
+}
+if (window.DeviceOrientationEvent) {
+  window.addEventListener("deviceorientation", deviceOrientationHandler, false);
+  document.body.style.backgroundColor = "white";
+} else {
+  console.log(
+    "L'accéléromètre et la boussole ne sont pas disponibles sur cet appareil."
   );
   document.body.style.backgroundColor = "red";
 }
@@ -26,7 +58,7 @@ if (window.DeviceMotionEvent) {
 // Fonction pour gérer les événements de mouvement de l'appareil
 function deviceMotionHandler(eventData) {
   var acceleration = eventData.accelerationIncludingGravity;
-  var threshold = 5;
+  var threshold = 2;
 
   // Calculer la force de la secousse
   var shakeX = Math.abs(acceleration.x - gravity.x);
@@ -41,20 +73,14 @@ function deviceMotionHandler(eventData) {
 
 // Fonction pour gérer les événements d'orientation de l'appareil
 function deviceOrientationHandler(eventData) {
-  var threshold = 90;
+  var threshold = 2;
 
-  if (
-    eventData.alpha != null &&
-    eventData.beta != null &&
-    eventData.gamma != null
-  ) {
-    // Calculer l'angle de rotation autour de l'axe Z (vertical)
-    var rotation = Math.abs(eventData.gamma);
+  // Calculer l'angle de rotation autour de l'axe Z (vertical)
+  var rotation = eventData.alpha;
 
-    // Si l'angle de rotation est suffisamment grand, afficher une alerte
-    if (rotation > threshold) {
-      document.body.style.backgroundColor = "blue";
-    }
+  // Si l'angle de rotation est suffisamment grand, afficher une alerte
+  if (rotation > threshold) {
+    document.body.style.backgroundColor = "blue";
   }
 }
 
@@ -64,7 +90,6 @@ var gravity = {
   y: 0,
   z: 0,
 };
-
 window.addEventListener(
   "devicemotion",
   function (event) {
