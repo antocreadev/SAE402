@@ -8,7 +8,9 @@ main {
   overflow-y: hidden;
   overflow-x: hidden;
 }
-
+iframe {
+  width: 90vw;
+}
 body {
   background-color: black;
 }
