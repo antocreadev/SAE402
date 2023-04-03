@@ -33,7 +33,7 @@ img {
 }
 /* green */
 #imgGreen {
-  top: -100vh;
+  top: -100%;
 }
 .animImgGreen {
   animation: imgGreen 2s;
@@ -41,7 +41,7 @@ img {
 }
 @keyframes imgGreen {
   0% {
-    top: -100vh;
+    top: -100%;
   }
   100% {
     top: calc(
