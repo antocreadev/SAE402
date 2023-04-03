@@ -9,7 +9,6 @@ main {
   overflow-x: hidden;
 }
 
-
 body {
   background-color: black;
 }
@@ -45,7 +44,9 @@ img {
     top: -100vh;
   }
   100% {
-    top: calc(50vh - 315px - env(safe-area-inset-top));
+    top: calc(
+      50vh - 315px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+    );
   }
 }
 
