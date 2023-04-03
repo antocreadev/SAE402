@@ -9,10 +9,7 @@ main {
   overflow-x: hidden;
 }
 
-/* env(safe-area-inset-top);
-env(safe-area-inset-right);
-env(safe-area-inset-bottom);
-env(safe-area-inset-left); */
+
 body {
   background-color: black;
 }
@@ -48,7 +45,7 @@ img {
     top: -100vh;
   }
   100% {
-    top: calc(50vh - 315px);
+    top: calc(50vh - 315px - env(safe-area-inset-top));
   }
 }
 
