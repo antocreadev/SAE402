@@ -22,7 +22,7 @@ circleWhite.addEventListener("click", () => {
     audio2.src = "sound/Laudate-Dominum-Terza.mp3"; // 8
     audio2.play();
 
-    // // BLUE TERZA
+    // // // BLUE TERZA
     var audio3 = new Audio();
     audio3.src = "sound/Laudate-Dominum-Bassu.mp3"; //3
     audio3.play();
@@ -31,10 +31,11 @@ circleWhite.addEventListener("click", () => {
   // RED BASSU
   setTimeout(() => {
     imgRed.classList.add("animImgRed");
-  }, 8000 + 2000);
+  }, 7400 + 2000);
 
   // BLUE TERZA
   setTimeout(() => {
     imgBlue.classList.add("animImgBlue");
-  }, 3000 + 2000);
+  }, 2200 + 2000);
+  //
 });
