@@ -3,12 +3,16 @@ body,
 main {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: calc(100% - env(safe-area-inset-bottom));
+  width: calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right));
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   overflow-y: hidden;
   overflow-x: hidden;
 }
 
+/* env(safe-area-inset-top);
+env(safe-area-inset-right);
+env(safe-area-inset-bottom);
+env(safe-area-inset-left); */
 body {
   background-color: black;
 }
@@ -51,7 +55,7 @@ img {
 /* blue */
 #imgBlue {
   right: -150vw;
-  bottom: calc(50vh - 230px);
+  bottom: calc(50vh - 230px - env(safe-area-inset-bottom));
 }
 .animImgBlue {
   animation: imgBlue 2s;
@@ -63,15 +67,15 @@ img {
     bottom: -100vh;
   }
   100% {
-    right: calc(50vw - 260px);
-    bottom: calc(50vh - 230px);
+    right: calc(50vw - 260px - env(safe-area-inset-right));
+    bottom: calc(50vh - 230px - env(safe-area-inset-bottom));
   }
 }
 
 /* red */
 #imgRed {
   left: -150vw;
-  bottom: calc(50vh - 230px);
+  bottom: calc(50vh - 230px - env(safe-area-inset-bottom));
 }
 .animImgRed {
   animation: imgRed 2s;
@@ -84,8 +88,8 @@ img {
     bottom: -100vh;
   }
   100% {
-    left: calc(50vw - 260px);
-    bottom: calc(50vh - 230px);
+    left: calc(50vw - 260px - env(safe-area-inset-left));
+    bottom: calc(50vh - 230px - env(safe-area-inset-bottom));
   }
 }
 /*------ CIRCLE WHITE ------*/
