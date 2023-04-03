@@ -5,8 +5,6 @@ const imgGreen = document.querySelector("#imgGreen");
 const imgBlue = document.querySelector("#imgBlue");
 console.log(circleWhite);
 
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-
 // AUDIO
 // 1
 var audio1 = new Audio();
@@ -48,20 +46,8 @@ const bufferLength_audio3 = analyser_audio3.frequencyBinCount;
 const dataArray_audio3 = new Uint8Array(bufferLength_audio3);
 
 // Obtenir les données audio en temps réel
-
 function getAudioData() {
   requestAnimationFrame(getAudioData);
-
-  // Start audio context if it's in a suspended state
-  if (audioContext_audio1.state === "suspended") {
-    audioContext_audio1.resume();
-  }
-  if (audioContext_audio2.state === "suspended") {
-    audioContext_audio2.resume();
-  }
-  if (audioContext_audio3.state === "suspended") {
-    audioContext_audio3.resume();
-  }
 
   // AUDIO 1
   analyser_audio1.getByteFrequencyData(dataArray_audio1);
