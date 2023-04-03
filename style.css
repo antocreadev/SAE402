@@ -17,14 +17,17 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 0;
 }
+
 * {
   color: white;
 }
 
 /*------ IMG rgb ------*/
 img {
-  position: absolute;
+  position: fixed;
   mix-blend-mode: screen;
   width: 350px;
 }
@@ -87,7 +90,7 @@ img {
 }
 /*------ CIRCLE WHITE ------*/
 #circleWhite {
-  position: relative;
+  position: fixed;
   z-index: 10;
   background-color: rgba(255, 255, 255, 0.4);
   width: 70px;
