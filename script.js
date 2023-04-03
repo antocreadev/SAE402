@@ -4,6 +4,8 @@ const imgRed = document.querySelector("#imgRed");
 const imgGreen = document.querySelector("#imgGreen");
 const imgBlue = document.querySelector("#imgBlue");
 const imgPaghjella = document.querySelector("#imgPaghjella");
+const animP = document.querySelector("#animP");
+
 console.log(circleWhite);
 
 // Obtenir les données audio en temps réel
@@ -74,5 +76,6 @@ circleWhite.addEventListener("click", () => {
     imgBlue.classList.add("animImgBlue");
     imgPaghjella.classList.add("animPaghjella");
     circleWhite.classList.add("animCircleWhitePaghjella");
+    animP.classList.add("animP");
   }, 8200);
 });
