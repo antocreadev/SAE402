@@ -1,8 +1,113 @@
-body {
+html,
+body,
+main {
   margin: 0;
   padding: 0;
-  background-color: black;
-  color: white;
   width: 100%;
   height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: black;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+* {
+  color: white;
+}
+
+/*------ IMG rgb ------*/
+img {
+  position: absolute;
+  mix-blend-mode: screen;
+  width: 350px;
+}
+/* green */
+#imgGreen {
+  top: -100vh;
+}
+.animImgGreen {
+  animation: imgGreen 2s;
+  animation-fill-mode: forwards; /* block animation */
+}
+@keyframes imgGreen {
+  0% {
+    top: -100vh;
+  }
+  100% {
+    top: calc(50vh - 315px);
+  }
+}
+
+/* blue */
+#imgBlue {
+  right: -150vw;
+  bottom: calc(50vh - 230px);
+}
+.animImgBlue {
+  animation: imgBlue 2s;
+  animation-fill-mode: forwards; /* block animation */
+}
+@keyframes imgBlue {
+  0% {
+    right: -150vw;
+    bottom: -100vh;
+  }
+  100% {
+    right: calc(50vw - 260px);
+    bottom: calc(50vh - 230px);
+  }
+}
+
+/* red */
+#imgRed {
+  left: -150vw;
+  bottom: calc(50vh - 230px);
+}
+.animImgRed {
+  animation: imgRed 2s;
+  animation-fill-mode: forwards; /* block animation */
+}
+
+@keyframes imgRed {
+  0% {
+    left: -150vw;
+    bottom: -100vh;
+  }
+  100% {
+    left: calc(50vw - 260px);
+    bottom: calc(50vh - 230px);
+  }
+}
+/*------ CIRCLE WHITE ------*/
+#circleWhite {
+  position: relative;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+}
+
+.animCircleWhite {
+  animation: circle 2s;
+  animation-fill-mode: forwards; /* block animation */
+}
+
+@keyframes circle {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(40);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
