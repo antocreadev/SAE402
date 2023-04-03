@@ -45,7 +45,7 @@ img {
   }
   100% {
     top: calc(
-      50vh - 315px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+      50% - 315px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
     );
   }
 }
