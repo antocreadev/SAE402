@@ -18,7 +18,7 @@ function getAudioData(analyser, bufferLength, dataArray, imgElement) {
   const frequency = dataArray[Math.floor(bufferLength / 2)];
 
   // Mettre à jour l'opacité de l'image en fonction des données audio
-  imgElement.style.opacity = `${gain / 200}`;
+  imgElement.style.opacity = `${gain / 160}`;
 }
 
 // Démarrer l'analyse audio
