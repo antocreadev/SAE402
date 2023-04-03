@@ -24,7 +24,10 @@ main {
 * {
   color: white;
 }
-
+#imgPaghjella {
+  top: 10vh;
+  opacity: 0;
+}
 /*------ IMG rgb ------*/
 img {
   position: fixed;
@@ -94,7 +97,8 @@ img {
 #circleWhite {
   position: fixed;
   z-index: 10;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 1);
+  opacity: 0.4;
   width: 70px;
   height: 70px;
   border-radius: 100%;
@@ -114,5 +118,37 @@ img {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+.animPaghjella {
+  animation: paghjella 5s;
+  animation-fill-mode: forwards; /* block animation */
+}
+@keyframes paghjella {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animCircleWhitePaghjella {
+  animation: animCircleWhitePaghjella 5s;
+  animation-fill-mode: forwards; /* block animation */
+}
+@keyframes animCircleWhitePaghjella {
+  0% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.8;
   }
 }

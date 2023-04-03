@@ -3,11 +3,14 @@ const circleWhite = document.querySelector("#circleWhite");
 const imgRed = document.querySelector("#imgRed");
 const imgGreen = document.querySelector("#imgGreen");
 const imgBlue = document.querySelector("#imgBlue");
+const imgPaghjella = document.querySelector("#imgPaghjella");
 console.log(circleWhite);
 
 // Obtenir les données audio en temps réel
 function getAudioData(analyser, bufferLength, dataArray, imgElement) {
-  requestAnimationFrame(() => getAudioData(analyser, bufferLength, dataArray, imgElement));
+  requestAnimationFrame(() =>
+    getAudioData(analyser, bufferLength, dataArray, imgElement)
+  );
 
   // Obtenir les données audio
   analyser.getByteFrequencyData(dataArray);
@@ -15,7 +18,7 @@ function getAudioData(analyser, bufferLength, dataArray, imgElement) {
   const frequency = dataArray[Math.floor(bufferLength / 2)];
 
   // Mettre à jour l'opacité de l'image en fonction des données audio
-  imgElement.style.opacity = `${gain / 255}`;
+  imgElement.style.opacity = `${gain / 200}`;
 }
 
 // Démarrer l'analyse audio
@@ -64,10 +67,12 @@ circleWhite.addEventListener("click", () => {
   // RED BASSU
   setTimeout(() => {
     imgRed.classList.add("animImgRed");
-  }, 7400 + 2000);
+  }, 3200);
 
   // BLUE TERZA
   setTimeout(() => {
     imgBlue.classList.add("animImgBlue");
-  }, 2200 + 2000);
+    imgPaghjella.classList.add("animPaghjella");
+    circleWhite.classList.add("animCircleWhitePaghjella");
+  }, 8200);
 });
