@@ -5,35 +5,71 @@ const imgGreen = document.querySelector("#imgGreen");
 const imgBlue = document.querySelector("#imgBlue");
 console.log(circleWhite);
 
+// AUDIO
+// 1
+var audio1 = new Audio();
+audio1.src = "sound/Laudate-Dominum-Seconda.mp3";
+const audioContext_audio1 = new AudioContext();
+const source_audio1 = audioContext_audio1.createMediaElementSource(audio1);
+const analyser_audio1 = audioContext_audio1.createAnalyser();
+source_audio1.connect(analyser_audio1);
+analyser_audio1.connect(audioContext_audio1.destination);
+// Configurer l'analyseur
+analyser_audio1.fftSize = 2048;
+const bufferLength_audio1 = analyser_audio1.frequencyBinCount;
+const dataArray_audio1 = new Uint8Array(bufferLength_audio1);
+
+// AUDIO 2
+var audio2 = new Audio();
+audio2.src = "sound/Laudate-Dominum-Terza.mp3";
+const audioContext_audio2 = new AudioContext();
+const source_audio2 = audioContext_audio2.createMediaElementSource(audio2);
+const analyser_audio2 = audioContext_audio2.createAnalyser();
+source_audio2.connect(analyser_audio2);
+analyser_audio2.connect(audioContext_audio2.destination);
+// Configurer l'analyseur
+analyser_audio2.fftSize = 2048;
+const bufferLength_audio2 = analyser_audio2.frequencyBinCount;
+const dataArray_audio2 = new Uint8Array(bufferLength_audio2);
+
+// AUDIO 3
+var audio3 = new Audio();
+audio3.src = "sound/Laudate-Dominum-Bassu.mp3";
+const audioContext_audio3 = new AudioContext();
+const source_audio3 = audioContext_audio3.createMediaElementSource(audio3);
+const analyser_audio3 = audioContext_audio3.createAnalyser();
+source_audio3.connect(analyser_audio3);
+analyser_audio3.connect(audioContext_audio3.destination);
+// Configurer l'analyseur
+analyser_audio3.fftSize = 2048;
+const bufferLength_audio3 = analyser_audio3.frequencyBinCount;
+const dataArray_audio3 = new Uint8Array(bufferLength_audio3);
+
 // Obtenir les données audio en temps réel
-function getAudioData(analyser, bufferLength, dataArray, imgElement) {
-  requestAnimationFrame(() => getAudioData(analyser, bufferLength, dataArray, imgElement));
+function getAudioData() {
+  requestAnimationFrame(getAudioData);
 
-  // Obtenir les données audio
-  analyser.getByteFrequencyData(dataArray);
-  const gain = dataArray[0];
-  const frequency = dataArray[Math.floor(bufferLength / 2)];
+  // AUDIO 1
+  analyser_audio1.getByteFrequencyData(dataArray_audio1);
+  const gain1 = dataArray_audio1[0];
+  const frequency1 = dataArray_audio1[Math.floor(bufferLength_audio1 / 2)];
+  imgGreen.style.opacity = `${gain1 / 255}`;
 
-  // Mettre à jour l'opacité de l'image en fonction des données audio
-  imgElement.style.opacity = `${gain / 255}`;
+  // AUDIO 2
+  analyser_audio2.getByteFrequencyData(dataArray_audio2);
+  const gain2 = dataArray_audio2[0];
+  const frequency2 = dataArray_audio2[Math.floor(bufferLength_audio2 / 2)];
+  imgRed.style.opacity = `${gain2 / 255}`;
+
+  // AUDIO 3
+  analyser_audio3.getByteFrequencyData(dataArray_audio3);
+  const gain3 = dataArray_audio3[0];
+  const frequency3 = dataArray_audio3[Math.floor(bufferLength_audio3 / 2)];
+  imgBlue.style.opacity = `${gain3 / 255}`;
 }
 
 // Démarrer l'analyse audio
-function startAudioAnalysis(audio, imgElement) {
-  const audioContext = new AudioContext();
-  const source = audioContext.createMediaElementSource(audio);
-  const analyser = audioContext.createAnalyser();
-  source.connect(analyser);
-  analyser.connect(audioContext.destination);
-
-  // Configurer l'analyseur
-  analyser.fftSize = 2048;
-  const bufferLength = analyser.frequencyBinCount;
-  const dataArray = new Uint8Array(bufferLength);
-
-  // Démarrer l'analyse audio
-  getAudioData(analyser, bufferLength, dataArray, imgElement);
-}
+getAudioData();
 
 circleWhite.addEventListener("click", () => {
   // add class
@@ -41,24 +77,16 @@ circleWhite.addEventListener("click", () => {
   setTimeout(() => {
     //---------------------------- GREEN SECONDA
     // audio play
-    var audio1 = new Audio();
-    audio1.src = "sound/Laudate-Dominum-Seconda.mp3";
+
     audio1.play();
     // animation
     imgGreen.classList.add("animImgGreen");
-    startAudioAnalysis(audio1, imgGreen);
 
     ///----------------------------RED BASSU
-    var audio2 = new Audio();
-    audio2.src = "sound/Laudate-Dominum-Bassu.mp3";
-    audio2.play();
-    startAudioAnalysis(audio2, imgRed);
 
+    audio2.play();
     ///----------------------------BLUE TERZA
-    var audio3 = new Audio();
-    audio3.src = "sound/Laudate-Dominum-Terza.mp3";
     audio3.play();
-    startAudioAnalysis(audio3, imgBlue);
   }, 2000);
 
   // RED BASSU
@@ -70,4 +98,5 @@ circleWhite.addEventListener("click", () => {
   setTimeout(() => {
     imgBlue.classList.add("animImgBlue");
   }, 2200 + 2000);
+  //
 });
